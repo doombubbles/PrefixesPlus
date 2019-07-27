@@ -1,15 +1,21 @@
 # PrefixesPlus
 
 Mysterious: +10 Mana
+
 Mystical: +30 Mana
+
 Sorcerous: +40 Mana
 
 Fresh: +5 Max HP
+
 Tough: +10 Max HP
+
 Healthy: +15 Max HP
+
 Vigorous: +20 Max HP
 
 Opportune: +5% Crit Damage
+
 Decisive: +10% Crit Damage
 
 Refreshing: +.5 Life Regen
