@@ -1,0 +1,5 @@
+displayName = Prefixes+
+author = doombubbles
+version = 0.1
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
+homepage=https://github.com/doombubbles/PrefixesPlus

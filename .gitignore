@@ -1,0 +1,10 @@
+.idea/
+*.user
+*.cache
+PrefixesPlus.sln
+.vs/config/applicationhost.config
+*.suo
+*.dll
+bin/
+obj/
+Properties/
