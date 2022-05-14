@@ -16,7 +16,7 @@ namespace PrefixesPlus
         {
             if (crit)
             {
-                damage += (int)(damage * (player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
+                damage += (int)(damage * (Player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
             }
             base.ModifyHitNPC(item, target, ref damage, ref knockback, ref crit);
         }
@@ -26,7 +26,7 @@ namespace PrefixesPlus
         {
             if (crit)
             {
-                damage += (int)(damage * (player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
+                damage += (int)(damage * (Player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
             }
             base.ModifyHitNPCWithProj(proj, target, ref damage, ref knockback, ref crit, ref hitDirection);
         }
@@ -35,7 +35,7 @@ namespace PrefixesPlus
         {
             if (crit)
             {
-                damage += (int)(damage * (player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
+                damage += (int)(damage * (Player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
             }
             base.ModifyHitPvpWithProj(proj, target, ref damage, ref crit);
         }
@@ -44,7 +44,7 @@ namespace PrefixesPlus
         {
             if (crit)
             {
-                damage += (int)(damage * (player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
+                damage += (int)(damage * (Player.GetModPlayer<PrefixPlayer>().critDamage / 200f));
             }
             base.ModifyHitPvp(item, target, ref damage, ref crit);
         }

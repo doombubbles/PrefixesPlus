@@ -4,8 +4,6 @@ namespace PrefixesPlus
 {
 	public class PrefixesPlus : Mod
 	{
-		public PrefixesPlus()
-		{
-		}
+		
 	}
 }

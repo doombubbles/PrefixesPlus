@@ -1,61 +1,41 @@
 using Terraria;
-using Terraria.ModLoader;
 
 namespace PrefixesPlus.Prefixes
 {
-	public class HpPrefix : ModPrefix
+	public abstract class HpPrefix : PrefixPlus
 	{
-		private readonly byte hp = 0;
+		protected abstract byte Hp { get; }
 
-		// see documentation for vanilla weights and more information
-		// note: a weight of 0f can still be rolled. see CanRoll to exclude prefixes.
-		// note: if you use PrefixCategory.Custom, actually use ChoosePrefix instead, see ExampleInstancedGlobalItem
-		public override float RollChance(Item item)
+		public override void UpdateEquip(Player player)
 		{
-			return 1f;
-		} 
-
-		// determines if it can roll at all.
-		// use this to control if a prefixes can be rolled or not
-		public override bool CanRoll(Item item)
-		{
-			return true;
+			player.statLifeMax2 += Hp;
 		}
 
-		// change your category this way, defaults to Custom
-		public override PrefixCategory Category { get { return PrefixCategory.Accessory; } }
-		
-		public HpPrefix()
-		{
-		}
+		public override string GetTooltip() => $"+{Hp} life";
 
-		public HpPrefix(byte hp)
-		{
-			this.hp = hp;
-		}
-
-		// Allow multiple prefix autoloading this way (permutations of the same prefix)
-		public override bool Autoload(ref string name)
-		{
-			if (base.Autoload(ref name))
-			{
-				mod.AddPrefix("Fresh", new HpPrefix(5));
-				mod.AddPrefix("Tough", new HpPrefix(10));
-				mod.AddPrefix("Healthy", new HpPrefix(15));
-				mod.AddPrefix("Vigorous", new HpPrefix(20));
-			}
-			return false;
-		}
-
-		public override void Apply(Item item)
-		{
-			item.GetGlobalItem<PrefixItem>().hp = hp;
-		}
-
-		
 		public override void ModifyValue(ref float valueMult)
 		{
-			valueMult *= 1f + hp * .01f;
+			valueMult *= 1f + Hp * .1f;
+		}
+
+		public class Fresh : HpPrefix
+		{
+			protected override byte Hp => 5;
+		}
+		
+		public class Tough : HpPrefix
+		{
+			protected override byte Hp => 10;
+		}
+		
+		public class Healthy : HpPrefix
+		{
+			protected override byte Hp => 15;
+		}
+		
+		public class Vigorous : HpPrefix
+		{
+			protected override byte Hp => 5;
 		}
 		
 	}

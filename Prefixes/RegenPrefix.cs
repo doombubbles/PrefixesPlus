@@ -3,57 +3,31 @@ using Terraria.ModLoader;
 
 namespace PrefixesPlus.Prefixes
 {
-	public class RegenPrefix : ModPrefix
-	{
-		private readonly byte regen = 0;
+    public abstract class RegenPrefix : PrefixPlus
+    {
+        protected abstract byte Regen { get; }
 
-		// see documentation for vanilla weights and more information
-		// note: a weight of 0f can still be rolled. see CanRoll to exclude prefixes.
-		// note: if you use PrefixCategory.Custom, actually use ChoosePrefix instead, see ExampleInstancedGlobalItem
-		public override float RollChance(Item item)
-		{
-			return 1f;
-		} 
+        public override void ModifyValue(ref float valueMult)
+        {
+            valueMult = 1f + .1f * Regen;
+        }
 
-		// determines if it can roll at all.
-		// use this to control if a prefixes can be rolled or not
-		public override bool CanRoll(Item item)
-		{
-			return true;
-		}
+        public override void UpdateEquip(Player player)
+        {
+            player.lifeRegen += Regen;
+        }
 
-		// change your category this way, defaults to Custom
-		public override PrefixCategory Category { get { return PrefixCategory.Accessory; } }
-		
-		public RegenPrefix()
-		{
-		}
+        public override string GetTooltip() => $"+{Regen} life regen";
 
-		public RegenPrefix(byte regen)
-		{
-			this.regen = regen;
-		}
 
-		// Allow multiple prefix autoloading this way (permutations of the same prefix)
-		public override bool Autoload(ref string name)
-		{
-			if (base.Autoload(ref name))
-			{
-				mod.AddPrefix("Refreshing", new RegenPrefix(1));
-			}
-			return false;
-		}
+        public class RefreshingPrefix : RegenPrefix
+        {
+            protected override byte Regen => 1;
 
-		public override void Apply(Item item)
-		{
-			item.GetGlobalItem<PrefixItem>().regen = regen;
-		}
-
-		
-		public override void ModifyValue(ref float valueMult)
-		{
-			valueMult = 1f + .1f * regen;
-		}
-		
-	}
+            public override void SetStaticDefaults()
+            {
+                DisplayName.SetDefault("Refreshing");
+            }
+        }
+    }
 }
